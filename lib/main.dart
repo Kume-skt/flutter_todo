@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/provider/counter/index.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<Counter>(create: (_) => Counter()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +48,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final Counter countProvicer = Provider.of<Counter>(context);
+    int countProvider = countProvicer.count;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -47,10 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'ボタンを押しましょう！！',
             ),
             Text(
               '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              '$countProvider',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
