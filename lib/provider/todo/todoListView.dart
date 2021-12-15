@@ -3,7 +3,7 @@ import 'package:flutter_todo/provider/todo/todo.dart';
 import 'package:provider/provider.dart';
 
 class TodoViews extends StatelessWidget {
-  final TodoList _tList;
+  final List<Todo> _tList;
   TodoViews(this._tList);
 
   void onTapTitle(BuildContext context, Todo data) {
@@ -15,7 +15,7 @@ class TodoViews extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, index) {
         return Dismissible(
-            key: ObjectKey(_tList.todoList[index]),
+            key: ObjectKey(_tList[index]),
             background: Container(
               padding: EdgeInsets.only(
                 right: 10,
@@ -36,7 +36,7 @@ class TodoViews extends StatelessWidget {
                   child: ListTile(
                       onTap: () {},
                       title: Text(
-                        _tList.todoList[index].title,
+                        _tList[index].title,
                         style: TextStyle(fontSize: 20),
                       )),
                   padding: EdgeInsets.all(10)),
@@ -44,7 +44,7 @@ class TodoViews extends StatelessWidget {
             ));
       },
       shrinkWrap: true,
-      itemCount: this._tList.todoList.length,
+      itemCount: this._tList.length,
     );
   }
 }

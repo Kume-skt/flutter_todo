@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: TodoViews(_todoList),
+      body: TodoViews(_todoList.todoList),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => _makeTodoPage(context),
