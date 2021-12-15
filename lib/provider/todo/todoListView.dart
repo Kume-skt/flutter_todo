@@ -29,8 +29,6 @@ class TodoViews extends StatelessWidget {
             ),
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {
-              // スワイプ後に実行される（削除処理などを書く）
-              print('onDismissed');
               context.read<TodoList>().deleteTodo(index);
             },
             child: Card(

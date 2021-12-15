@@ -26,8 +26,6 @@ class TodoList extends ChangeNotifier {
   }
 
   deleteTodo(int index) {
-    print("kakuninnnnnnnnn     $index");
-
     _todoList.removeAt(index);
     notifyListeners();
   }

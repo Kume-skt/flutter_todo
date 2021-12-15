@@ -51,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     TodoList _todoList = context.watch<TodoList>();
-    // int count = countProvider.count;
 
     return Scaffold(
       appBar: AppBar(
