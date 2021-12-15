@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/makeTodo.dart';
 import 'package:flutter_todo/provider/counter/index.dart';
+import 'package:flutter_todo/provider/todo/todo.dart';
+import 'package:flutter_todo/provider/todo/todoListView.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -8,6 +11,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<Counter>(create: (_) => Counter()),
+        ChangeNotifierProvider<TodoList>(create: (_) => TodoList()),
       ],
       child: MyApp(),
     ),
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Todo リスト'),
     );
   }
 }
@@ -38,43 +42,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void _makeTodoPage(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return MakeTodoView();
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
-    final Counter countProvicer = Provider.of<Counter>(context);
-    int countProvider = countProvicer.count;
+    TodoList _todoList = context.watch<TodoList>();
+    // int count = countProvider.count;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'ボタンを押しましょう！！',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              '$countProvider',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
+      body: TodoViews(_todoList),
+
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => _makeTodoPage(context),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

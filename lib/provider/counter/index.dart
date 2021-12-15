@@ -4,11 +4,12 @@ class Counter extends ChangeNotifier {
   late int _count;
 
   Counter() {
-    _count = 10;
+    _count = 0;
   }
   int get count => this._count;
 
-  set setCount(int count) {
+  void setCount(int count) {
     _count = count;
+    notifyListeners();
   }
 }
